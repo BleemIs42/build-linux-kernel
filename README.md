@@ -236,6 +236,23 @@ compile
 make LLVM=1 KDIR=.../linux-with-rust-support 
 ```
 
+## GDB debug
+``` bash
+qemu-system-x86_64 \
+    -kernel vmlinux \
+    -initrd rootfs.img \
+    -nographic \
+    -s -S
+```
+```bash
+gdb vmlinux
+```
+如果gdb报告拒绝加载vmlinux-gdb.py（相关命令找不到），请将:
+```bash
+add-auto-load-safe-path /path/to/linux-build
+```
+添加到~/.gdbinit
+
 ## Clean 
 ```sh
 make clean
@@ -254,6 +271,7 @@ chmod +x arch/x86/tools/**/*
 ```
 
 # Reference
+- https://gist.github.com/m13253/e4c3e3a56a23623d2e7e6796678b9e58
 - https://gist.github.com/chrisdone/02e165a0004be33734ac2334f215380e
 - https://tomcat0x42.me/linux/rust/2023/04/01/linux-kernel-rust-dev-environment.html
 - https://docs.kernel.org/next/rust/quick-start.html
